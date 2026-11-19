@@ -1,0 +1,20 @@
+{
+  "name": "sistema-controle-estoque",
+  "version": "1.0.0",
+  "description": "FACULDADE GRAN (https://faculdade.grancursosonline.com.br/)\r Projeto Disciplina Projeto Integrador",
+  "homepage": "https://github.com/Claud1oRenson/sistema-controle-estoque#readme",
+  "bugs": {
+    "url": "https://github.com/Claud1oRenson/sistema-controle-estoque/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Claud1oRenson/sistema-controle-estoque.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
