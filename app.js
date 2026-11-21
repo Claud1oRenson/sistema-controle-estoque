@@ -1,5 +1,5 @@
 const http = require ('http');
-const { listarProdutos, cadastrarProduto } = require('./controllers/produtoController');
+const { listarProdutos, cadastrarProduto, buscarProdutoPorId } = require('./controllers/produtoController');
 
 const server = http.createServer((req, res) => {
     if (req.url === '/produtos' && req.method === 'GET') {  
@@ -8,6 +8,18 @@ const server = http.createServer((req, res) => {
     }
     if (req.url === '/produtos' && req.method === 'POST') {
         cadastrarProduto(req, res);
+        return;
+    }
+    if (req.url.startsWith('/produtos/') && req.method === 'GET') {
+        const idTexto = req.url.split('/')[2];
+        const id = /^\d+$/.test(idTexto) ? Number(idTexto) : NaN;
+        if (!Number.isSafeInteger(id) || id <= 0) {
+            res.writeHead(400, {'Content-type': 'application/json; charset=utf-8'});
+            res.end(JSON.stringify({ erro: 'ID do produto deve ser um número inteiro positivo' }));
+            return;
+        }
+
+        buscarProdutoPorId(req, res, id);
         return;
     }
     /*if (req.url === '/produtos' && req.method === 'PUT') {

@@ -130,3 +130,46 @@ Caso alguma validação falhe, a API retorna o código HTTP `400 Bad Request`, a
 Atualmente, os produtos são armazenados em memória durante a execução do servidor.
 
 Isso significa que os dados cadastrados são perdidos quando o servidor é reiniciado.
+
+
+### 6.5. Consultar Produto por ID
+
+- **Método:** GET
+- **Endpoint:** `/produtos/:id`
+- **Descrição:** Permite consultar um produto específico por meio de seu identificador único.
+
+**Exemplo de requisição:**
+
+GET http://localhost:3000/produtos/1
+
+**Resposta de sucesso (200 OK):**
+
+```json
+{
+  "nome": "Teclado",
+  "preco": 150,
+  "quantidade": 10,
+  "id": 1
+}
+```
+
+**Produto não encontrado (404 Not Found):**
+
+```json
+{
+  "erro": "Produto não encontrado"
+}
+```
+
+**ID inválido (400 Bad Request):**
+
+```json
+{
+  "erro": "ID do produto deve ser um número inteiro positivo"
+}
+```
+
+**Validação:**
+
+O identificador deve conter apenas dígitos e representar um número inteiro positivo e seguro. Valores negativos, zero, letras e números decimais são rejeitados.
+

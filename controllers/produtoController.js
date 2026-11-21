@@ -1,4 +1,6 @@
 const produtos = [];
+let proximoId =  1;
+
 
 const listarProdutos = (req, res) => {
     res.writeHead(200, {'Content-type': 'application/json; charset=utf-8'});
@@ -29,10 +31,23 @@ const cadastrarProduto = (req, res) => {
             res.end(JSON.stringify({ erro: 'Quantidade do produto deve ser um número inteiro não negativo' }));
             return;
         }
+        novoProduto.id = proximoId++;
+
         produtos.push(novoProduto);
         res.writeHead(201, {'Content-type': 'application/json; charset=utf-8'});
         res.end(JSON.stringify(novoProduto));
     });
 };
 
-module.exports = { listarProdutos, cadastrarProduto };
+const buscarProdutoPorId = (req, res, id) => {
+    const produto = produtos.find(item => item.id === id);
+    if (!produto) {
+        res.writeHead(404, {'Content-type': 'application/json; charset=utf-8'});
+        res.end(JSON.stringify({ erro: 'Produto não encontrado' }));
+        return;
+    }
+    res.writeHead(200, {'Content-type': 'application/json; charset=utf-8'});
+    res.end(JSON.stringify(produto));
+};
+
+module.exports = { listarProdutos, cadastrarProduto, buscarProdutoPorId };
